@@ -4,6 +4,8 @@ Zwei Schubladenboxen aus 10 mm Pappelsperrholz für den Kofferraum eines Opel Me
 Box 1 nutzt die volle Tiefe, Box 2 ist kürzer, damit die Kühlbox dahinter an der Rücklehne Platz hat.
 Beide Boxen sind 48 cm breit und lassen sich stapeln.
 
+**→ [Zur Bauanleitung](anleitung/README.md)**
+
 | | Box 1 | Box 2 |
 |---|---|---|
 | Außenmaß (T × B × H) | 750 × 480 × 300 mm | 420 × 480 × 300 mm |
@@ -14,7 +16,8 @@ Beide Boxen sind 48 cm breit und lassen sich stapeln.
 
 | Pfad | Was |
 |---|---|
-| [`anleitung/index.html`](anleitung/index.html) | Bauanleitung: Einkaufsliste, Zuschnitt, Querschnitt, Bauschritte mit Zeichnungen, Schablonen, Einbau im Auto. Im Browser öffnen. |
+| [`anleitung/README.md`](anleitung/README.md) | **Bauanleitung:** Einkaufsliste, Zuschnitt, Querschnitt, Schablonen, Bauschritte mit Zeichnungen, Einbau im Auto |
+| [`anleitung/index.html`](anleitung/index.html) | Dieselbe Anleitung als Webseite (lokal im Browser öffnen) |
 | [`zuschnitt.csv`](zuschnitt.csv) | Zuschnittliste aller Plattenteile (22 × Pappel 10 mm, 1 × Buche 18 mm) |
 | [`schablonen/meriva_schablonen.scad`](schablonen/meriva_schablonen.scad) | OpenSCAD-Datei aller Montageschablonen, parametrisch |
 | [`schablonen/stl/`](schablonen/stl) | Druckfertige STLs, ohne Stützmaterial druckbar |
