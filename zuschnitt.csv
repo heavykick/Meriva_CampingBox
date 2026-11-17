@@ -1,0 +1,16 @@
+Box;Teil;Bezeichnung;Laenge_mm;Breite_mm;Stueck;Material
+1;A;Seitenteil;740;300;2;Pappel 10 mm
+1;B;Boden / Deckel;740;460;2;Pappel 10 mm
+1;C;Rueckwand;460;280;1;Pappel 10 mm
+1;D;Blende;476;292;1;Pappel 10 mm
+1;E;Schubladenseite;700;200;2;Pappel 10 mm
+1;F;Stirnteil;414;200;2;Pappel 10 mm
+1;G;Schubladenboden;700;434;1;Pappel 10 mm
+2;A;Seitenteil;410;300;2;Pappel 10 mm
+2;B;Boden / Deckel;410;460;2;Pappel 10 mm
+2;C;Rueckwand;460;280;1;Pappel 10 mm
+2;D;Blende;476;292;1;Pappel 10 mm
+2;E;Schubladenseite;350;200;2;Pappel 10 mm
+2;F;Stirnteil;414;200;2;Pappel 10 mm
+2;G;Schubladenboden;434;350;1;Pappel 10 mm
+1+2;H;Brett (passt in beide Schubladen);434;233;1;Buche-Leimholz 18 mm

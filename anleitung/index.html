@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Meriva Küchenboxen</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700&family=Noto+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: eine Spalte wie ein Montageheft – Material, Zuschnitt, dann nummerierte Bauschritte mit Strichzeichnungen */
+:root{
+  --bg:#ffffff; --fg:#16181b; --muted:#5d636b; --rule:#d9dcdf; --panel:#f4f5f6;
+  --ink:#16181b;
+  --ply-top:#f6ead2; --ply-front:#ecd9b4; --ply-side:#dcc497;
+  --lath-top:#f3c99a; --lath-front:#e6ad72; --lath-side:#d4955a;
+  --rail-top:#9cc3ec; --rail-front:#5f9bd8; --rail-side:#3d7fc2;
+  --accent:#1f62b0; --warn:#b5530f; --warn-bg:#fdf1e6;
+  --f-display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"Noto Sans",Verdana,Arial,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#15171a; --fg:#e9eaec; --muted:#a2a8b0; --rule:#33373d; --panel:#1d2024;
+  --ink:#e9eaec;
+  --ply-top:#5a4f3b; --ply-front:#4a4030; --ply-side:#3b3326;
+  --lath-top:#7a5534; --lath-front:#664529; --lath-side:#523720;
+  --rail-top:#4b78a8; --rail-front:#3a6390; --rail-side:#2c4f75;
+  --accent:#7fb2ec; --warn:#f0a066; --warn-bg:#2d2219; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#15171a; --fg:#e9eaec; --muted:#a2a8b0; --rule:#33373d; --panel:#1d2024;
+  --ink:#e9eaec;
+  --ply-top:#5a4f3b; --ply-front:#4a4030; --ply-side:#3b3326;
+  --lath-top:#7a5534; --lath-front:#664529; --lath-side:#523720;
+  --rail-top:#4b78a8; --rail-front:#3a6390; --rail-side:#2c4f75;
+  --accent:#7fb2ec; --warn:#f0a066; --warn-bg:#2d2219; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.55}
+.wrap{max-width:980px;margin:0 auto;padding-block:32px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:48px}
+h1,h2,h3{font-family:var(--f-display);font-weight:700;letter-spacing:.01em;text-wrap:balance;margin:0;line-height:1.1}
+h1{font-size:44px}
+h2{font-size:30px;border-bottom:2px solid var(--ink);padding-bottom:6px}
+h3{font-size:22px}
+p{margin:0;max-width:68ch}
+.lead{color:var(--muted);max-width:68ch}
+section{display:flex;flex-direction:column;gap:18px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 24px;font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+.facts b{color:var(--fg);font-weight:600}
+.tbl{overflow-x:auto;border:1px solid var(--rule);border-radius:4px}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:8px 12px;border-bottom:1px solid var(--rule);vertical-align:top}
+th{font-family:var(--f-display);font-size:15px;letter-spacing:.04em;text-transform:uppercase;font-weight:500;color:var(--muted);background:var(--panel)}
+tr:last-child td{border-bottom:none}
+td.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.tag{display:inline-grid;place-items:center;min-width:26px;height:26px;padding:0 4px;border:1.5px solid var(--ink);border-radius:50%;font-family:var(--f-display);font-weight:700;font-size:15px}
+.tag.l{border-radius:4px;background:var(--lath-front);color:#16181b;border-color:var(--ink)}
+.chg{color:var(--warn);font-weight:600;font-size:12px;margin-left:6px;white-space:nowrap}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}
+.grid2>*{min-width:0}
+.note{background:var(--warn-bg);border-left:4px solid var(--warn);padding:12px 16px;border-radius:0 4px 4px 0;max-width:none}
+.note b{color:var(--warn)}
+ul.check{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+ul.check li{display:flex;gap:12px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--rule)}
+ul.check li:last-child{border-bottom:none}
+ul.check input{width:18px;height:18px;margin-top:2px;accent-color:var(--accent);flex:none}
+ul.check .q{font-family:var(--f-mono);font-size:13px;color:var(--muted);margin-left:auto;white-space:nowrap;padding-left:12px}
+ul.check .t{min-width:0}
+ul.check small{display:block;color:var(--muted)}
+input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.step{display:grid;grid-template-columns:72px 1fr;gap:8px 20px;border-top:1px solid var(--rule);padding-top:22px}
+.step .n{font-family:var(--f-display);font-weight:700;font-size:64px;line-height:.85}
+.step .body{display:flex;flex-direction:column;gap:12px;min-width:0}
+.step ol,.step ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;max-width:68ch}
+.fig{border:1px solid var(--rule);border-radius:4px;background:var(--bg);overflow-x:auto}
+.fig svg{display:block;width:100%;height:auto;min-width:420px}
+.cap{font-size:13px;color:var(--muted)}
+svg text{font-family:var(--f-mono);fill:var(--ink)}
+svg .lbl{font-family:var(--f-display);font-weight:700;font-size:20px}
+.f-ply-t{fill:var(--ply-top)} .f-ply-f{fill:var(--ply-front)} .f-ply-s{fill:var(--ply-side)}
+.f-lath-t{fill:var(--lath-top)} .f-lath-f{fill:var(--lath-front)} .f-lath-s{fill:var(--lath-side)}
+.f-rail-t{fill:var(--rail-top)} .f-rail-f{fill:var(--rail-front)} .f-rail-s{fill:var(--rail-side)}
+.edge{stroke:var(--ink);stroke-width:1.1;stroke-linejoin:round}
+.dim{stroke:var(--accent);stroke-width:1;fill:none}
+.dimt{fill:var(--accent);font-size:13px;font-weight:600}
+.arr{stroke:var(--ink);stroke-width:1.6;fill:none}
+.bad{fill:var(--bg);stroke:var(--ink);stroke-width:1.5}
+.lead-l{stroke:var(--ink);stroke-width:.8}
+.legend{display:flex;flex-wrap:wrap;gap:16px;font-size:13px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:14px;height:14px;border:1px solid var(--ink);display:inline-block}
+@media (max-width:560px){h1{font-size:34px}.step{grid-template-columns:1fr}.step .n{font-size:48px}}
+.tpl{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:14px;background:var(--panel);border:1px solid var(--rule);border-radius:4px;padding:8px 12px}
+.tpl>b{font-family:var(--f-display);font-size:16px;letter-spacing:.03em;margin-right:4px}
+a.chip{display:inline-flex;align-items:center;gap:6px;padding:2px 10px 2px 4px;border-radius:999px;background:var(--bg);border:1.5px solid var(--accent);color:var(--fg);text-decoration:none;font-size:13px}
+a.chip i{font-style:normal;font-family:var(--f-display);font-weight:700;background:var(--accent);color:var(--bg);border-radius:999px;min-width:22px;height:22px;display:inline-grid;place-items:center;font-size:14px}
+a.chip:hover,a.chip:focus-visible{background:var(--panel)}
+.tpls{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px}
+.tc{border:1px solid var(--rule);border-radius:6px;overflow:hidden;display:flex;flex-direction:column;scroll-margin-top:16px}
+.tc:target{outline:3px solid var(--accent);outline-offset:2px}
+.tc .im{background:#f8f8f8;aspect-ratio:16/10;padding:8px;overflow:hidden}
+.tc .im img{display:block;width:100%;height:100%;object-fit:contain}
+.tc .tx{padding:12px 14px;display:flex;flex-direction:column;gap:6px}
+.tc h3{display:flex;align-items:center;gap:8px;font-size:20px}
+.tc h3 i{font-style:normal;background:var(--accent);color:var(--bg);border-radius:999px;min-width:26px;height:26px;display:inline-grid;place-items:center;font-size:16px}
+.tc code{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.tc .st{font-size:13px;color:var(--muted)}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:14px">
+  <h1>Meriva Küchenboxen</h1>
+  <p class="lead">Zwei Schubladenboxen aus 10 mm Pappelsperrholz für den Kofferraum des Opel Meriva A. Box 1 nutzt die volle Tiefe, Box 2 ist kürzer, damit die Kühlbox dahinter an der Rücklehne Platz hat. Beide sind 48 cm breit und lassen sich stapeln.</p>
+  <div class="facts">
+    <span>Box 1 außen <b>750 × 480 × 300</b></span>
+    <span>Box 2 außen <b>420 × 480 × 300</b></span>
+    <span>Auszüge <b>700 / 350 mm, 45 kg, 12,7 mm</b></span>
+    <span>Gewicht ca. <b>11 / 7 kg</b> (leer)</span>
+  </div>
+  <div class="legend">
+    <span><i class="sw" style="background:var(--ply-front)"></i>Sperrholz 10 mm</span>
+    <span><i class="sw" style="background:var(--lath-front)"></i>Kiefernleiste 14 × 14</span>
+    <span><i class="sw" style="background:var(--rail-front)"></i>Vollauszug</span>
+    <span><i class="sw" style="background:none;border-color:var(--accent)"></i>Maß in mm</span>
+  </div>
+</header>
+
+<section>
+  <h2>Einkaufsliste</h2>
+  <p class="lead">Zum Abhaken. Der Haken bleibt nur in diesem Browser gespeichert.</p>
+  <ul class="check" id="shop">
+    <li><input type="checkbox" id="s1"><label class="t" for="s1">Pappelsperrholz 10 mm, Zuschnitt laut Tabelle (Hornbach)<small>Beide Boxen in einer Bestellung, 22 Teile</small></label><span class="q">ca. 102 €</span></li>
+    <li><input type="checkbox" id="s2"><label class="t" for="s2">Vollauszug mit Selbsteinzug, 45 kg, 700 mm<small>Für Box 1</small></label><span class="q">1 Paar</span></li>
+    <li><input type="checkbox" id="s3"><label class="t" for="s3">Vollauszug mit Selbsteinzug, 45 kg, 350 mm<small>Für Box 2, gleiches Modell</small></label><span class="q">1 Paar</span></li>
+    <li><input type="checkbox" id="s4"><label class="t" for="s4">Quadratstab Kiefer 14 × 14 mm (Hornbach, Konsta)<small>Ca. 9,9 m Bedarf. Mit 6 Stäben à 2 m geht es ohne Stückeln auf</small></label><span class="q">6 × 2 m</span></li>
+    <li><input type="checkbox" id="s5"><label class="t" for="s5">Holzleim D3, wasserfest</label><span class="q">250–500 g</span></li>
+    <li><input type="checkbox" id="s6"><label class="t" for="s6">Senkkopfschrauben 3,5 × 20<small>Platte in Leiste, Schubladenboden</small></label><span class="q">200 Stk</span></li>
+    <li><input type="checkbox" id="s7"><label class="t" for="s7">Senkkopfschrauben 3,5 × 18<small>Blende von innen durch das Stirnteil. 16 mm greifen nur 6 mm in die Blende</small></label><span class="q">20 Stk</span></li>
+    <li><input type="checkbox" id="s8"><label class="t" for="s8">Flachkopfschrauben 3,5 × 9 (max. 10)<small>Für die Auszüge. Mitgelieferte Schrauben sind meist zu lang für 10 mm</small></label><span class="q">60 Stk</span></li>
+    <li><input type="checkbox" id="s9"><label class="t" for="s9">Spanngurt 25 mm mit Klemmschloss<small>Sichert Boxen, Schubladen und Kühlbox an den Zurrösen</small></label><span class="q">2 Stk</span></li>
+    <li><input type="checkbox" id="s10"><label class="t" for="s10">Antirutschmatte<small>Unter die Boxen und zwischen die Boxen beim Stapeln</small></label><span class="q">ca. 1 m</span></li>
+    <li><input type="checkbox" id="s11"><label class="t" for="s11">Hartwachsöl oder Klarlack (wasserbasiert), Pinsel</label><span class="q">0,75 l</span></li>
+    <li><input type="checkbox" id="s12"><label class="t" for="s12">Schleifpapier Körnung 120 und 180</label><span class="q">je 2 Bogen</span></li>
+    <li><input type="checkbox" id="s14"><label class="t" for="s14">Buche-Leimholz 18 mm, Zuschnitt 434 × 233<small>Ein Brett, passt auf beide Schubladen. Faser quer zur Schublade, also entlang der 434 mm</small></label><span class="q">1 Stk</span></li>
+    <li><input type="checkbox" id="s15"><label class="t" for="s15">Schneidebrettöl oder Leinöl (lebensmittelecht)<small>Nur für das Brett</small></label><span class="q">1 Fl.</span></li>
+    <li><input type="checkbox" id="s13"><label class="t" for="s13">Doppelseitiges Klebeband<small>Zum Ausrichten der Blende</small></label><span class="q">1 Rolle</span></li>
+  </ul>
+  <h3>Werkzeug</h3>
+  <p>Akkuschrauber, Holzbohrer 2 und 3 mm, Kegelsenker, Feinsäge mit Gehrungslade für die Leisten, Stichsäge und Forstnerbohrer 25 mm für den Griff, 4–6 Zwingen, Anschlagwinkel, Zollstock, Bleistift.</p>
+</section>
+
+<section>
+  <h2>Zuschnitt</h2>
+  <div class="note"><b>Vor der Bestellung ändern:</b> Die Blende ist jetzt 476 × 292 statt 480 × 300. Damit bleibt seitlich 2 mm und oben und unten 4 mm Fuge, und die Blende schleift beim Ausziehen nicht auf dem Ladeboden. Alle anderen Maße entsprechen der 10-mm-Liste.</div>
+  <div class="grid2">
+    <div>
+      <h3 style="margin-bottom:10px">Box 1</h3>
+      <div class="tbl"><table>
+        <thead><tr><th>Teil</th><th>Name</th><th>Maß</th><th>Stk</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag">A</span></td><td>Seitenteil</td><td class="num">740 × 300</td><td class="num">2</td></tr>
+          <tr><td><span class="tag">B</span></td><td>Boden / Deckel</td><td class="num">740 × 460</td><td class="num">2</td></tr>
+          <tr><td><span class="tag">C</span></td><td>Rückwand</td><td class="num">460 × 280</td><td class="num">1</td></tr>
+          <tr><td><span class="tag">D</span></td><td>Blende<span class="chg">geändert</span></td><td class="num">476 × 292</td><td class="num">1</td></tr>
+          <tr><td><span class="tag">E</span></td><td>Schubladenseite<span class="chg">geändert</span></td><td class="num">700 × 200</td><td class="num">2</td></tr>
+          <tr><td><span class="tag">F</span></td><td>Stirnteil<span class="chg">geändert</span></td><td class="num">414 × 200</td><td class="num">2</td></tr>
+          <tr><td><span class="tag">G</span></td><td>Schubladenboden</td><td class="num">434 × 700</td><td class="num">1</td></tr>
+          <tr><td><span class="tag">H</span></td><td>Brett, Buche-Leimholz 18 mm<span class="chg">neu</span></td><td class="num">434 × 233</td><td class="num">1</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div>
+      <h3 style="margin-bottom:10px">Box 2</h3>
+      <div class="tbl"><table>
+        <thead><tr><th>Teil</th><th>Name</th><th>Maß</th><th>Stk</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag">A</span></td><td>Seitenteil</td><td class="num">410 × 300</td><td class="num">2</td></tr>
+          <tr><td><span class="tag">B</span></td><td>Boden / Deckel</td><td class="num">410 × 460</td><td class="num">2</td></tr>
+          <tr><td><span class="tag">C</span></td><td>Rückwand</td><td class="num">460 × 280</td><td class="num">1</td></tr>
+          <tr><td><span class="tag">D</span></td><td>Blende<span class="chg">geändert</span></td><td class="num">476 × 292</td><td class="num">1</td></tr>
+          <tr><td><span class="tag">E</span></td><td>Schubladenseite<span class="chg">geändert</span></td><td class="num">350 × 200</td><td class="num">2</td></tr>
+          <tr><td><span class="tag">F</span></td><td>Stirnteil<span class="chg">geändert</span></td><td class="num">414 × 200</td><td class="num">2</td></tr>
+          <tr><td><span class="tag">G</span></td><td>Schubladenboden</td><td class="num">434 × 350</td><td class="num">1</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+  <h3>Leisten 14 × 14 (selbst ablängen)</h3>
+  <div class="tbl"><table>
+    <thead><tr><th>Teil</th><th>Wofür</th><th>Box 1</th><th>Box 2</th></tr></thead>
+    <tbody>
+      <tr><td><span class="tag l">L1</span></td><td>Längskanten oben und unten an den Seitenteilen</td><td class="num">4 × 730</td><td class="num">4 × 400</td></tr>
+      <tr><td><span class="tag l">L2</span></td><td>Senkrecht hinten an den Seitenteilen (für die Rückwand)</td><td class="num">2 × 252</td><td class="num">2 × 252</td></tr>
+      <tr><td><span class="tag l">L3</span></td><td>Quer hinten an Boden und Deckel, dazu eine Querleiste mittig unter dem Deckel</td><td class="num">3 × 432</td><td class="num">3 × 432</td></tr>
+      <tr><td><span class="tag l">L4</span></td><td>Innenecken der Schublade</td><td class="num">4 × 200</td><td class="num">4 × 200</td></tr>
+      <tr><td><span class="tag l">L5</span></td><td>Unter dem Brett, seitliche Führung</td><td class="num" colspan="2">2 × 233 (ein Brett für beide)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="cap">Aufteilung auf 2-m-Stäbe: ① 730 + 730 + 400 · ② 730 + 730 + 400 · ③ 400 + 400 + 432 + 432 + 252 · ④ 4 × 432 + 200 · ⑤ 3 × 252 + 2 × 233 + 3 × 200 · ⑥ 4 × 200 (Rest als Reserve).</p>
+</section>
+
+<section>
+  <h2>Querschnitt von vorn</h2>
+  <p class="lead">Die wichtigsten Maße auf einen Blick. Box 1 und Box 2 haben denselben Querschnitt. Das Brett passt in beide Schubladen.</p>
+  <div class="fig"><svg id="sec" role="img" aria-label="Querschnitt der Box von vorn mit Maßen"></svg></div>
+</section>
+
+<section id="schablonen">
+  <h2>Schablonen</h2>
+  <p class="lead">Die Nummer im Kreis findest du bei den Bauschritten wieder. Blau ist die Schablone, orange die Leiste, grau der Auszug. Der Name darunter ist die STL-Datei bzw. der Wert für <code>teil</code> in der OpenSCAD-Datei.</p>
+  <div class="tpls" id="tpls"></div>
+</section>
+
+<section>
+  <h2>Aufbau</h2>
+  <p class="lead">Die Zeichnungen zeigen Box 1. Box 2 baust du in denselben Schritten, nur kürzer (Maße in Klammern). Bohr mit 2 mm durch Platte und Leiste vor, weite dann das Loch in der Platte auf 3 mm auf und senke an. So zieht die Schraube die Platte fest an die Leiste. Leim und Schraube gehören zusammen, setz die Schrauben ca. alle 12 cm und 3 cm von den Enden entfernt.</p>
+  <div id="steps" style="display:flex;flex-direction:column;gap:28px"></div>
+</section>
+
+<section>
+  <h2>Im Kofferraum</h2>
+  <div class="fig"><svg id="car" role="img" aria-label="Draufsicht Kofferraum mit Box 1, Box 2 und Kühlbox"></svg></div>
+  <ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;max-width:68ch">
+    <li>Box 1 links, Box 2 rechts an der Heckklappe, die Kühlbox quer dahinter direkt an der Rücklehne (max. ca. 31 cm tief). Rechts bleiben ca. 3 cm für den Gurt.</li>
+    <li>Ein Spanngurt läuft über die Fronten beider Boxen von Zurröse zu Zurröse. Er hält die Schubladen beim Fahren zu und die Boxen am Platz. Box 2 drückt die Kühlbox gegen die Lehne.</li>
+    <li>Beide Schubladen sind jederzeit von der Heckklappe aus erreichbar. Die Kühlbox öffnest du von oben, über Box 2 hinweg.</li>
+    <li>Gestapelt steht Box 2 auf Box 1, bündig zur Heckklappe, mit Antirutschmatte dazwischen. Dann muss der Gurt <b>über beide</b> Boxen laufen.</li>
+    <li>Zum Kochen kommt der Kocher auf die voll ausgezogene Schublade von Box 1, außerhalb des Autos. Nicht aufstützen.</li>
+  </ul>
+</section>
+</div>
+
+<script>
+(function(){
+"use strict";
+var NS="http://www.w3.org/2000/svg";
+var K=0.5, CA=Math.cos(Math.PI/6), SA=Math.sin(Math.PI/6);
+function P(p){return [p[0]+K*p[1]*CA, -(p[2]+K*p[1]*SA)];}
+function el(n,a,parent){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(parent)parent.appendChild(e);return e;}
+function B(x0,y0,z0,x1,y1,z1,c){return {a:[x0,y0,z0],b:[x1,y1,z1],c:c||"ply"};}
+function mv(list,dx,dy,dz){return list.map(function(o){return {a:[o.a[0]+dx,o.a[1]+dy,o.a[2]+dz],b:[o.b[0]+dx,o.b[1]+dy,o.b[2]+dz],c:o.c};});}
+var E=0.01;
+function before(p,q){ // p must be drawn before q
+  if(p.a[1]>=q.b[1]-E) return true;        // p behind q
+  if(p.b[0]<=q.a[0]+E) return true;        // p left of q
+  if(p.b[2]<=q.a[2]+E) return true;        // p below q
+  return false;}
+function sep(p,q){ // order only if they're separable
+  return (p.a[1]>=q.b[1]-E)||(q.a[1]>=p.b[1]-E)||(p.b[0]<=q.a[0]+E)||(q.b[0]<=p.a[0]+E)||(p.b[2]<=q.a[2]+E)||(q.b[2]<=p.a[2]+E);}
+function order(bx){
+  var n=bx.length,ind=new Array(n).fill(0),adj=bx.map(function(){return[];});
+  var sb=bx.map(function(o){var xs=[],ys=[];[0,1].forEach(function(i){[0,1].forEach(function(j){[0,1].forEach(function(k){var s=P([i?o.b[0]:o.a[0],j?o.b[1]:o.a[1],k?o.b[2]:o.a[2]]);xs.push(s[0]);ys.push(s[1]);});});});
+    return [Math.min.apply(0,xs),Math.min.apply(0,ys),Math.max.apply(0,xs),Math.max.apply(0,ys)];});
+  for(var i=0;i<n;i++)for(var j=0;j<n;j++){if(i===j)continue;
+    var p=bx[i],q=bx[j],u=sb[i],v=sb[j];
+    if(u[2]<=v[0]+0.5||v[2]<=u[0]+0.5||u[3]<=v[1]+0.5||v[3]<=u[1]+0.5) continue;
+    // priority: depth (y), then x, then z
+    var r=null;
+    if(p.a[1]>=q.b[1]-E) r=true; else if(q.a[1]>=p.b[1]-E) r=false;
+    else if(p.b[0]<=q.a[0]+E) r=true; else if(q.b[0]<=p.a[0]+E) r=false;
+    else if(p.b[2]<=q.a[2]+E) r=true; else if(q.b[2]<=p.a[2]+E) r=false;
+    if(r===true){adj[i].push(j);ind[j]++;}
+  }
+  var out=[],qu=[];for(var k=0;k<n;k++)if(!ind[k])qu.push(k);
+  while(qu.length){var v=qu.shift();out.push(bx[v]);adj[v].forEach(function(w){if(--ind[w]===0)qu.push(w);});}
+  if(out.length<n)bx.forEach(function(b){if(out.indexOf(b)<0)out.push(b);});
+  return out;}
+function poly(g,pts,cls){el("polygon",{points:pts.map(function(p){var s=P(p);return s[0].toFixed(1)+","+s[1].toFixed(1);}).join(" "),"class":cls+" edge"},g);}
+function drawBox(g,o){var a=o.a,b=o.b,c=o.c;
+  poly(g,[[a[0],a[1],a[2]],[b[0],a[1],a[2]],[b[0],a[1],b[2]],[a[0],a[1],b[2]]],"f-"+c+"-f");
+  poly(g,[[b[0],a[1],a[2]],[b[0],b[1],a[2]],[b[0],b[1],b[2]],[b[0],a[1],b[2]]],"f-"+c+"-s");
+  poly(g,[[a[0],a[1],b[2]],[b[0],a[1],b[2]],[b[0],b[1],b[2]],[a[0],b[1],b[2]]],"f-"+c+"-t");}
+function scene(svg,opt){
+  var g=el("g",{},svg),pts=[];
+  var list=opt.groups?[].concat.apply([],opt.groups.map(order)):order(opt.boxes);
+  list.forEach(function(o){drawBox(g,o);
+    [[o.a[0],o.a[1],o.a[2]],[o.b[0],o.b[1],o.b[2]],[o.b[0],o.a[1],o.a[2]],[o.a[0],o.b[1],o.b[2]],[o.a[0],o.a[1],o.b[2]],[o.b[0],o.b[1],o.a[2]]].forEach(function(p){pts.push(P(p));});});
+  (opt.arrows||[]).forEach(function(r){var s=P(r[0]),t=P(r[1]);
+    el("line",{x1:s[0],y1:s[1],x2:t[0],y2:t[1],"class":"arr","marker-end":"url(#ah)"},g);pts.push(s,t);});
+  (opt.dims||[]).forEach(function(d){var A=P(d.a),Bp=P(d.b),o=d.o||[0,0];
+    var a2=[A[0]+o[0],A[1]+o[1]],b2=[Bp[0]+o[0],Bp[1]+o[1]];
+    el("line",{x1:A[0],y1:A[1],x2:a2[0],y2:a2[1],"class":"dim","stroke-dasharray":"2 2"},g);
+    el("line",{x1:Bp[0],y1:Bp[1],x2:b2[0],y2:b2[1],"class":"dim","stroke-dasharray":"2 2"},g);
+    el("line",{x1:a2[0],y1:a2[1],x2:b2[0],y2:b2[1],"class":"dim","marker-start":"url(#dt)","marker-end":"url(#dt)"},g);
+    var m=[(a2[0]+b2[0])/2+(d.to?d.to[0]:0),(a2[1]+b2[1])/2+(d.to?d.to[1]:0)];
+    var t=el("text",{x:m[0],y:m[1],"class":"dimt","text-anchor":d.anchor||"middle","dominant-baseline":"middle"},g);t.textContent=d.t;
+    pts.push(a2,b2,[m[0]-30,m[1]],[m[0]+30,m[1]]);});
+  (opt.labels||[]).forEach(function(l){var s=P(l.p),d=l.d||[0,0],t=[s[0]+d[0],s[1]+d[1]];
+    if(d[0]||d[1])el("line",{x1:s[0],y1:s[1],x2:t[0],y2:t[1],"class":"lead-l"},g);
+    var w=l.t.length>1?34:28;
+    if(l.t.length>1)el("rect",{x:t[0]-w/2,y:t[1]-13,width:w,height:26,rx:4,"class":"bad"},g);
+    else el("circle",{cx:t[0],cy:t[1],r:14,"class":"bad"},g);
+    var tx=el("text",{x:t[0],y:t[1]+1,"class":"lbl","text-anchor":"middle","dominant-baseline":"middle"},g);tx.textContent=l.t;
+    pts.push([t[0]-20,t[1]-20],[t[0]+20,t[1]+20]);});
+  (opt.notes||[]).forEach(function(n){var s=P(n.p);var t=el("text",{x:s[0],y:s[1],"font-size":"13","text-anchor":n.anchor||"start"},g);t.textContent=n.t;pts.push([s[0]-(n.anchor==="end"?n.t.length*8:0),s[1]-10],[s[0]+(n.anchor==="end"?0:n.t.length*8),s[1]+6]);});
+  var xs=pts.map(function(p){return p[0];}),ys=pts.map(function(p){return p[1];});
+  var pad=24,x0=Math.min.apply(0,xs)-pad,y0=Math.min.apply(0,ys)-pad,w=Math.max.apply(0,xs)-x0+pad,h=Math.max.apply(0,ys)-y0+pad;
+  svg.setAttribute("viewBox",x0.toFixed(0)+" "+y0.toFixed(0)+" "+w.toFixed(0)+" "+h.toFixed(0));
+  defs(svg);}
+function defs(svg){var d=el("defs",{},svg);
+  var m=el("marker",{id:"ah",viewBox:"0 0 10 10",refX:"9",refY:"5",markerWidth:"9",markerHeight:"9",orient:"auto-start-reverse"},d);
+  el("path",{d:"M0,0 L10,5 L0,10 z",fill:"var(--ink)"},m);
+  var t=el("marker",{id:"dt",viewBox:"0 0 10 10",refX:"5",refY:"5",markerWidth:"8",markerHeight:"8",orient:"auto"},d);
+  el("path",{d:"M5,0 L5,10",stroke:"var(--accent)","stroke-width":"1.5"},t);}
+
+/* ---------- Teile Box 1 (mm). x = Breite, y = Tiefe (0 = Heckklappe), z = Höhe ---------- */
+var sideL=[B(0,0,0,10,740,300)], sideLL=[B(10,0,10,25,730,25,"lath"),B(10,0,275,25,730,290,"lath"),B(10,715,25,25,730,275,"lath")];
+var railL=[B(10,0,132,22.7,700,178,"rail")];
+var sideR=[B(470,0,0,480,740,300)], sideRL=[B(455,0,10,470,730,25,"lath"),B(455,0,275,470,730,290,"lath"),B(455,715,25,470,730,275,"lath")];
+var railR=[B(457.3,0,132,470,700,178,"rail")];
+var boden=[B(10,0,0,470,740,10)], bodenL=[B(25,715,10,455,730,25,"lath")];
+var deckel=[B(10,0,290,470,740,300)], deckelL=[B(25,715,275,455,730,290,"lath"),B(25,357,275,455,372,290,"lath")];
+var back=[B(10,730,10,470,740,290)];
+var dSide=[B(23,0,45,33,700,245),B(447,0,45,457,700,245)];
+var dStirn=[B(33,0,45,447,10,245),B(33,690,45,447,700,245)];
+var dL4=[B(33,10,45,48,25,245,"lath"),B(432,10,45,447,25,245,"lath"),B(33,675,45,48,690,245,"lath"),B(432,675,45,447,690,245,"lath")];
+var dBot=[B(23,0,35,457,700,45)];
+var dRail=[B(457,0,132,469.7,700,178,"rail"),B(10.3,0,132,23,700,178,"rail")];
+var blende=[B(2,-10,4,180,0,296),B(300,-10,4,478,0,296),B(180,-10,4,300,0,271)];
+var carcass=[].concat(sideL,sideLL,railL,sideR,sideRL,railR,boden,bodenL,deckel,deckelL,back);
+var drawer=[].concat(dSide,dStirn,dL4,dBot,dRail);
+
+var steps=[
+ {t:"Leisten an die Seitenteile",tpl:[["eck_seite","an beiden hinteren Ecken"],["kante_10","am vorderen Ende von L1"],["bohrlehre","Reihe 17"]],
+  html:"<ol><li>Auf beide Seitenteile <span class='tag'>A</span> innen je zwei Leisten <span class='tag l'>L1</span> längs leimen, <b>10 mm</b> von der Ober- und Unterkante. In diesen Streifen sitzen später Boden und Deckel.</li><li>Vorn schließen die Leisten bündig ab, hinten bleiben 10 mm frei für die Rückwand.</li><li>Senkrecht dazwischen <span class='tag l'>L2</span> setzen, ebenfalls 10 mm von der Hinterkante.</li><li>Von außen durch die Platte in die Leiste schrauben (3,5 × 20). Das zweite Seitenteil baust du spiegelbildlich.</li></ol>",
+  boxes:[].concat(sideL,sideLL),
+  labels:[{t:"A",p:[0,300,150],d:[-40,0]},{t:"L1",p:[25,400,25],d:[60,30]},{t:"L1",p:[25,400,290],d:[60,-30]},{t:"L2",p:[25,722,150],d:[70,0]}],
+  dims:[{a:[10,0,300],b:[10,0,290],o:[-30,0],t:"10",to:[-14,0],anchor:"end"},{a:[10,740,300],b:[10,730,300],o:[0,-26],t:"10",to:[0,-10]}]},
+ {t:"Korpusschienen montieren",tpl:[["schiene_korpus","2 Stück, vorn und hinten"]],
+  html:"<ol><li>Den Auszug auseinandernehmen: Die innere Schiene kommt an die Schublade, die äußere an den Korpus. Wie das geht, steht in der Anleitung des Auszugs, meist löst man sie mit einem Hebel.</li><li>Auf dem Seitenteil eine Linie <b>155 mm</b> über der Unterkante anreißen. Das ist die Mittellinie der Schiene.</li><li>Die Schiene vorn bündig mit der Vorderkante ausrichten, zuerst durch die Langlöcher schrauben (3,5 × 9 Flachkopf), dann die runden Löcher setzen. Das Gleiche am zweiten Seitenteil.</li></ol><p class='cap'>So liegt die Schiene vor dem Zusammenbau flach auf dem Tisch. Das ist viel einfacher, als später in der Box zu schrauben.</p>",
+  boxes:[].concat(sideL,sideLL,railL),
+  labels:[{t:"A",p:[0,300,150],d:[-40,0]}],
+  dims:[{a:[10,0,0],b:[10,0,155],o:[-40,0],t:"155",to:[-8,0],anchor:"end"}]},
+ {t:"Leisten an Boden und Deckel",tpl:[["eck_boden","an beiden hinteren Ecken"],["bohrlehre","Reihe 17, von unten in L3"]],
+  html:"<ol><li>Auf den Boden <span class='tag'>B</span> hinten eine Leiste <span class='tag l'>L3</span> quer leimen, 10 mm von der Hinterkante und mittig, sodass links und rechts je 14 mm frei bleiben (dort liegen die <span class='tag l'>L1</span>).</li><li>Beim Deckel genauso, dazu eine zweite <span class='tag l'>L3</span> quer in der Mitte: bei 358 mm von vorn (Box 2: 193 mm). Sie verhindert, dass der Deckel durchhängt, wenn Box 2 oder die Kühlbox darauf steht.</li></ol>",
+  boxes:[].concat(boden,bodenL,mv([B(10,0,0,470,740,10),B(25,715,10,455,730,25,"lath"),B(25,357,10,455,372,25,"lath")],560,0,0)),
+  labels:[{t:"B",p:[240,200,10],d:[-60,40]},{t:"L3",p:[240,722,25],d:[0,-40]},{t:"B",p:[800,200,10],d:[60,40]},{t:"L3",p:[800,365,25],d:[90,-30]}],
+  notes:[{p:[10,-70,0],t:"Boden"},{p:[570,-70,0],t:"Deckel, Unterseite oben"}]},
+ {t:"Korpus verschrauben",tpl:[["bohrlehre","Reihe 7"]],
+  html:"<ol><li>Den Boden zwischen die Seitenteile auf die unteren <span class='tag l'>L1</span> setzen, sodass die Unterkanten bündig sind. Von unten durch den Boden in die Leisten schrauben.</li><li>Den Deckel genauso von oben einsetzen und verschrauben. Die Senkköpfe müssen flächenbündig sitzen, damit Box 2 beim Stapeln plan aufliegt.</li><li>Mit dem Winkel prüfen, ob der Korpus rechtwinklig ist, bevor der Leim anzieht.</li></ol>",
+  boxes:[].concat(mv([].concat(sideL,sideLL,railL),-140,0,0),boden,bodenL,mv([].concat(sideR,sideRL,railR),140,0,0),mv([].concat(deckel,deckelL),0,0,180)),
+  arrows:[[[-60,0,320],[-10,0,320]],[[560,0,320],[500,0,320]],[[240,0,450],[240,0,330]]],
+  labels:[{t:"A",p:[-140,300,150],d:[-40,0]},{t:"B",p:[240,200,10],d:[0,40]},{t:"B",p:[240,200,480],d:[0,-40]},{t:"A",p:[620,300,150],d:[40,0]}]},
+ {t:"Rückwand einsetzen",tpl:[["bohrlehre","Reihe 7"]],
+  html:"<ol><li>Die Rückwand <span class='tag'>C</span> hinten zwischen Seiten, Boden und Deckel einsetzen. Sie liegt an den Leisten <span class='tag l'>L2</span> und <span class='tag l'>L3</span> an und schließt bündig mit der Hinterkante ab.</li><li>Von hinten durch die Rückwand in die Leisten schrauben. Die Rückwand macht den Korpus endgültig steif.</li></ol>",
+  boxes:[].concat(sideL,sideLL,railL,sideR,sideRL,railR,boden,bodenL,deckel,deckelL,mv(back,0,180,140)),
+  arrows:[[[240,960,300],[240,800,180]]],
+  labels:[{t:"C",p:[240,920,290],d:[60,-40]}]},
+ {t:"Schublade bauen",tpl:[["bohrlehre","Stirnteil 7 · Seite 17 · Boden 5"]],
+  html:"<ol><li>An beide Stirnteile <span class='tag'>F</span> innen links und rechts je eine Leiste <span class='tag l'>L4</span> bündig leimen und schrauben.</li><li>Die Seiten <span class='tag'>E</span> außen an die Stirnteile setzen und von außen in die <span class='tag l'>L4</span> schrauben. Außenmaß jetzt 434 mm.</li><li>Den Boden <span class='tag'>G</span> <b>vollflächig</b> unter die Seiten und Stirnteile leimen, dann von unten in die Kanten schrauben (2,0 mm vorbohren, mittig in die 10-mm-Kante). Der Leim trägt, die Schrauben drücken nur an. Akkuschrauber auf kleines Drehmoment stellen, damit die Pappelkante nicht aufspaltet.</li><li>Diagonalen messen: Sind beide gleich lang, ist die Schublade rechtwinklig.</li></ol>",
+  boxes:[].concat(mv([dSide[0]],-90,0,0),mv([dSide[1]],90,0,0),mv([dStirn[0]].concat(dL4.slice(0,2)),0,-120,0),mv([dStirn[1]].concat(dL4.slice(2)),0,60,0),mv(dBot,0,0,-110)),
+  arrows:[[[-40,350,155],[5,350,155]],[[560,350,155],[480,350,155]],[[240,-160,280],[240,-40,280]],[[240,0,-120],[240,0,-40]]],
+  labels:[{t:"E",p:[-67,300,155],d:[-50,0]},{t:"E",p:[547,300,155],d:[50,0]},{t:"F",p:[240,-120,155],d:[-60,60]},{t:"L4",p:[460,-95,245],d:[50,-40]},{t:"G",p:[240,300,-65],d:[90,40]}],
+  dims:[{a:[-67,0,45],b:[-67,0,245],o:[-40,0],t:"200",to:[-8,0],anchor:"end"}]},
+ {t:"Schienen an die Schublade",tpl:[["schiene_schublade","2 Stück, vorn und hinten"]],
+  html:"<ol><li>Auf beiden Schubladenseiten eine Linie <b>110 mm</b> über der Unterkante der Seite anreißen. Die Linie liegt 10 mm über der Mitte. Das ist Absicht, so passt die Korpusschiene bei 155 mm. Unterkante heißt hier die Seite selbst, ohne den Boden darunter.</li><li>Die Innenschiene ist schmaler als der ganze Auszug. Mit der Schienenlehre ⑥ ziehst du vorn und hinten einen Strich auf der Mittellinie und verbindest beide mit dem Lineal. Die Schraubenlöcher der Innenschiene liegen auf dieser Linie. Schiene vorn bündig mit dem Stirnteil anschrauben (3,5 × 9 Flachkopf).</li><li>Rechnerisch läuft die Schublade dann 25 mm über dem Korpusboden.</li></ol>",
+  boxes:[].concat(dSide,dStirn,dL4,dBot,[dRail[0]]),
+  labels:[{t:"E",p:[457,350,210],d:[60,-30]}],
+  dims:[{a:[457,0,45],b:[457,0,155],o:[-120,40],t:"110",to:[-10,0],anchor:"end"}]},
+ {t:"Schublade einsetzen",
+  html:"<ol><li>Die Schublade mit den inneren Schienen in die Korpusschienen einführen und gerade einschieben, bis sie einrastet.</li><li>Ein paarmal ganz aus- und einfahren. Klemmt sie, die Schrauben in den Langlöchern lösen und nachjustieren.</li><li>Zum Schluss alle runden Löcher verschrauben.</li></ol>",
+  groups:[carcass,mv(drawer,0,-760,0)],
+  arrows:[[[240,-300,330],[240,-60,330]]]},
+ {t:"Blende und Griff",tpl:[["griff","Ausschnitt anzeichnen"],["blende","links und rechts"]],
+  html:"<ol><li>In die Blende <span class='tag'>D</span> oben mittig einen Griffausschnitt sägen: <b>120 mm breit, 25 mm tief</b>, die Ecken mit dem 25-mm-Forstner rund bohren (die zwei Löcher der Griffschablone zeigen die Mittelpunkte zum Ankörnen), dazwischen mit der Stichsäge sägen und die Kanten gut verschleifen.</li><li>Doppelseitiges Klebeband auf das vordere Stirnteil kleben. Die Blende mit <b>2 mm</b> Fuge seitlich und <b>4 mm</b> zum Boden ausrichten und andrücken.</li><li>Schublade ausziehen und von innen durch das Stirnteil in die Blende schrauben (6–8 × 3,5 × 18). Wenn die Fugen stimmen, die Blende noch einmal lösen, Leim aufs Stirnteil geben und wieder anschrauben.</li></ol>",
+  groups:[carcass,mv(drawer,0,-720,0),mv(blende,0,-880,0)],
+  arrows:[[[240,-880,340],[240,-740,300]]],
+  labels:[{t:"D",p:[90,-890,150],d:[-60,0]},{t:"F",p:[240,-720,200],d:[120,-60]}],
+  dims:[{a:[180,-890,296],b:[300,-890,296],o:[0,-26],t:"120",to:[0,-10]}]},
+ {t:"Brett",tpl:[["kante_11","für beide Leisten L5"]],
+  html:"<ol><li>Unter das Brett <span class='tag'>H</span> zwei Leisten <span class='tag l'>L5</span> leimen, parallel zu den kurzen Kanten des Brettes, also in Schubladenlänge. Abstand von der langen Seitenkante jeweils <b>11 mm</b>: 10 mm für die Schubladenseite und 1 mm Luft.</li><li>Leim reicht, zwei Zwingen halten die Leisten, bis er trocken ist. Wenn du schrauben willst, nimm 3,5 × 25: Die 3,5 × 20 greifen nur 6 mm ins Brett.</li><li>Kanten rund schleifen und mit Schneidebrettöl mehrmals ölen, kein Lack.</li><li>Das Brett liegt auf den Seiten der Schublade und lässt sich längs schieben. Vorn und hinten stoppt es an den Eckleisten. Es passt in beide Schubladen.</li></ol>",
+  groups:[[].concat(dSide,dStirn,dL4,dBot,dRail),[B(34,233,381,48,466,395,"lath"),B(432,233,381,446,466,395,"lath"),B(23,233,395,457,466,413)]],
+  arrows:[[[240,350,375],[240,350,265]]],
+  labels:[{t:"H",p:[23,300,413],d:[-60,-30]},{t:"L5",p:[34,233,388],d:[-60,30]}],
+  dims:[{a:[23,233,413],b:[457,233,413],o:[0,-30],t:"434",to:[0,-10]},{a:[457,233,395],b:[457,466,395],o:[40,0],t:"233",to:[14,0],anchor:"start"}]}
+];
+
+var TPL=[
+ {id:"eck_seite",n:1,t:"Eckschablone 10/10",f:"eck_seite",d:"Hintere Ecken der Seitenteile, oben und unten. Hakt über beide Kanten. L1 und L2 legst du einfach an die Stege.",s:[1]},
+ {id:"kante_10",n:2,t:"Kantenschablone 10",f:"kante_10",d:"Vorderes Ende von L1. Hinten hält die Eckschablone, vorn diese, dann liegt die Leiste auf ganzer Länge 10 mm von der Kante.",s:[1]},
+ {id:"bohrlehre",n:3,t:"Bohrlehre 17 / 7 / 5",f:"bohrlehre",d:"An die Plattenkante hängen und mit 2 mm vorbohren. 17: Platte in Leiste L1/L2/L3 und Schubladenseite in L4. 7: Boden, Deckel, Rückwand und Stirnteil. 5: Schubladenboden in die Kanten.",s:[1,3,4,5,6]},
+ {id:"schiene_korpus",n:4,t:"Schienenlehre 155",f:"schiene_korpus",d:"2 Stück. Greift mit einem Kanal über die schon aufgeleimte Leiste L1 und hakt an der Unterkante des Seitenteils ein. Den Auszug mit seiner Unterkante anlegen. Die hintere Lehre nicht direkt an L2 setzen.",s:[2]},
+ {id:"eck_boden",n:5,t:"Eckschablone 10/14",f:"eck_boden",d:"Hintere Ecken von Boden und Deckel für L3: 10 mm von hinten, 14 mm von der Seite.",s:[3]},
+ {id:"schiene_schublade",n:6,t:"Schienenlehre 110",f:"schiene_schublade",d:"Anreißlehre, 2 Stück. Hakt unter dem Schubladenboden ein. Ihr Ende liegt genau auf der Schienenmitte (110 mm über der Seite, 120 mm ab Unterkante Boden). Strich ziehen, Schraubenlöcher der Innenschiene auf den Strich setzen. Hast du die Höhe der Innenschiene gemessen, trag sie als schiene_innen_h ein, dann wird daraus eine Anlegelehre wie ④.",s:[7]},
+ {id:"griff",n:7,t:"Griffschablone",f:"griff",d:"Über die Oberkante der Blende hängen, Kerbe auf die Mitte (238 mm) ausrichten, Ausschnitt umfahren. Die zwei Löcher sind die Ansatzpunkte für den 25-mm-Forstner.",s:[9]},
+ {id:"blende",n:8,t:"Blendenlehre links / rechts",f:"blende_links + blende_rechts",d:"Box steht auf dem Tisch. Die Blende steht auf dem 4-mm-Fuß und stößt an die 2-mm-Stufe. So stimmen die Fugen ohne Messen.",s:[9]},
+ {id:"kante_11",n:9,t:"Kantenschablone 11",f:"kante_11",d:"Die beiden Führungsleisten L5 unter dem Brett, 11 mm von der langen Kante.",s:[10]}
+];
+var TI={};TPL.forEach(function(x){TI[x.id]=x;});
+var gal=document.getElementById("tpls");
+TPL.forEach(function(x){var c=document.createElement("article");c.className="tc";c.id="tpl-"+x.id;
+  c.innerHTML="<div class='im'><img src='img/"+x.id+".png' alt='"+x.t+" im Einsatz' loading='lazy'></div><div class='tx'><h3><i>"+x.n+"</i>"+x.t+"</h3><code>"+x.f+"</code><p>"+x.d+"</p><span class='st'>Schritt "+x.s.join(", ")+"</span></div>";
+  gal.appendChild(c);});
+var host=document.getElementById("steps");
+steps.forEach(function(s,i){
+  var st=document.createElement("article");st.className="step";
+  var chips=(s.tpl||[]).map(function(t){var x=TI[t[0]];return "<a class='chip' href='#tpl-"+x.id+"'><i>"+x.n+"</i>"+x.t+"</a><span class='cap'>"+t[1]+"</span>";}).join("");
+  st.innerHTML="<div class='n'>"+(i+1)+"</div><div class='body'><h3>"+s.t+"</h3>"+(chips?"<div class='tpl'><b>Schablone</b>"+chips+"</div>":"")+s.html+"<div class='fig'></div></div>";
+  host.appendChild(st);
+  var svg=el("svg",{role:"img","aria-label":"Schritt "+(i+1)+": "+s.t},st.querySelector(".fig"));
+  scene(svg,s);
+});
+var fin=document.createElement("article");fin.className="step";
+fin.innerHTML="<div class='n'>"+(steps.length+1)+"</div><div class='body'><h3>Schleifen und versiegeln</h3><ul><li>Alle Kanten mit Körnung 120, dann 180 brechen und verschleifen.</li><li>Zwei Schichten Hartwachsöl oder Klarlack, auch innen und auf den Unterseiten. So nimmt Pappel bei Feuchtigkeit kein Wasser auf.</li><li>Antirutschmatte unter die Box legen, fertig. Box 2 genauso bauen.</li></ul></div>";
+host.appendChild(fin);
+
+/* ---------- Querschnitt (2D) ---------- */
+(function(){
+  var svg=document.getElementById("sec"),S=1.2,ox=60,oy=30,H=300;
+  function X(x){return ox+x*S;} function Y(z){return oy+(H-z)*S;}
+  function R(x0,z0,x1,z1,c){el("rect",{x:X(x0),y:Y(z1),width:(x1-x0)*S,height:(z1-z0)*S,"class":"f-"+c+"-f edge"},svg);}
+  function D(x0,y0,x1,y1,t,tx,ty,anchor){el("line",{x1:x0,y1:y0,x2:x1,y2:y1,"class":"dim","marker-start":"url(#dt)","marker-end":"url(#dt)"},svg);
+    var e=el("text",{x:tx,y:ty,"class":"dimt","text-anchor":anchor||"middle","dominant-baseline":"middle"},svg);e.textContent=t;}
+  defs(svg);
+  R(0,0,10,300,"ply");R(470,0,480,300,"ply");R(10,0,470,10,"ply");R(10,290,470,300,"ply");
+  R(10,10,25,25,"lath");R(10,275,25,290,"lath");R(455,10,470,25,"lath");R(455,275,470,290,"lath");
+  R(10,132,22.7,178,"rail");R(457.3,132,470,178,"rail");
+  R(23,45,33,245,"ply");R(447,45,457,245,"ply");R(23,35,457,45,"ply");
+  R(33,45,48,245,"lath");R(432,45,447,245,"lath");
+  R(34,231,48,245,"lath");R(432,231,446,245,"lath");R(23,245,457,263,"ply");
+  R(25,276,455,290,"lath");
+  el("line",{x1:X(0),y1:Y(155),x2:X(480),y2:Y(155),stroke:"var(--accent)","stroke-dasharray":"6 4","stroke-width":"0.8"},svg);
+  var by=Y(0)+28;
+  D(X(0),by,X(480),by,"480 außen",X(240),by+16);
+  D(X(23),Y(0)+56,X(457),Y(0)+56,"434 Schublade außen",X(240),Y(0)+72);
+  D(X(33),Y(215),X(447),Y(215),"414 lichte Breite",X(240),Y(215)-12);
+  var rx=X(480)+26;
+  D(rx,Y(0),rx,Y(155),"155 Schienenmitte",rx+8,Y(78),"start");
+  var rx2=X(480)+190;
+  D(rx2,Y(10),rx2,Y(35),"25",rx2+8,Y(22),"start");
+  D(rx2,Y(45),rx2,Y(245),"200 Seite",rx2+8,Y(145),"start");
+  D(rx2,Y(245),rx2,Y(263),"18 Brett",rx2+8,Y(254),"start");
+  D(rx2,Y(263),rx2,Y(276),"13 Luft",rx2+8,Y(270),"start");
+  var lx=X(0)-22;
+  D(lx,Y(0),lx,Y(300),"300",lx-6,Y(150),"end");
+  var t=el("text",{x:X(240),y:Y(300)-12,"font-size":"13","text-anchor":"middle"},svg);t.textContent="Platte 10 · Leisten 14 × 14 · Schiene 12,7";
+  svg.setAttribute("viewBox","0 0 "+(X(480)+310)+" "+(Y(0)+92));
+})();
+
+/* ---------- Draufsicht Kofferraum ---------- */
+(function(){
+  var svg=document.getElementById("car"),S=0.62,ox=60,oy=40,DD=790;
+  function X(x){return ox+x*S;} function Y(y){return oy+(DD-y)*S;}
+  function R(x0,y0,x1,y1,cls,txt,sub){el("rect",{x:X(x0),y:Y(y1),width:(x1-x0)*S,height:(y1-y0)*S,"class":cls+" edge"},svg);
+    var t=el("text",{x:X((x0+x1)/2),y:Y((y0+y1)/2)-(sub?8:0),"class":"lbl","text-anchor":"middle","dominant-baseline":"middle"},svg);t.textContent=txt;
+    if(sub){var s=el("text",{x:X((x0+x1)/2),y:Y((y0+y1)/2)+14,"font-size":"12","text-anchor":"middle"},svg);s.textContent=sub;}}
+  defs(svg);
+  el("rect",{x:X(0),y:Y(DD),width:1000*S,height:DD*S,fill:"var(--panel)",stroke:"var(--ink)","stroke-dasharray":"6 4"},svg);
+  var a=el("text",{x:X(500),y:Y(DD)-14,"font-size":"13","text-anchor":"middle"},svg);a.textContent="Rückbank (Lehne)";
+  var b=el("text",{x:X(500),y:Y(0)+40,"font-size":"13","text-anchor":"middle"},svg);b.textContent="Heckklappe";
+  R(0,0,480,750,"f-ply-t","Box 1","750 × 480");
+  R(490,0,970,420,"f-ply-t","Box 2","420 × 480");
+  el("rect",{x:X(530),y:Y(760),width:400*S,height:300*S,fill:"var(--rail-top)","class":"edge"},svg);
+  var k=el("text",{x:X(730),y:Y(610),"class":"lbl","text-anchor":"middle","dominant-baseline":"middle"},svg);k.textContent="Kühlbox";
+  el("line",{x1:X(-20),y1:Y(-12),x2:X(1020),y2:Y(-12),stroke:"var(--warn)","stroke-width":"4"},svg);
+  var g=el("text",{x:X(1000),y:Y(-12)+20,"font-size":"12","text-anchor":"end",fill:"var(--warn)"},svg);g.textContent="Spanngurt über die Fronten";g.setAttribute("style","fill:var(--warn)");
+  var y1=Y(0)+60;
+  el("line",{x1:X(0),y1:y1,x2:X(1000),y2:y1,"class":"dim","marker-start":"url(#dt)","marker-end":"url(#dt)"},svg);
+  var w=el("text",{x:X(500),y:y1+16,"class":"dimt","text-anchor":"middle"},svg);w.textContent="1000 Breite am Boden";
+  var lx=X(0)-24;
+  el("line",{x1:lx,y1:Y(0),x2:lx,y2:Y(790),"class":"dim","marker-start":"url(#dt)","marker-end":"url(#dt)"},svg);
+  var d=el("text",{x:lx-6,y:Y(395),"class":"dimt","text-anchor":"end","dominant-baseline":"middle"},svg);d.textContent="790";
+  svg.setAttribute("viewBox","0 0 "+(X(1000)+50)+" "+(y1+30));
+})();
+
+/* ---------- Einkaufsliste merken (nur dieser Browser) ---------- */
+var KEY="meriva-boxen-shop";var st={};
+try{st=JSON.parse(localStorage.getItem(KEY)||"{}")||{};}catch(e){st={};}
+document.querySelectorAll("#shop input").forEach(function(c){c.checked=!!st[c.id];
+  c.addEventListener("change",function(){st[c.id]=c.checked;try{localStorage.setItem(KEY,JSON.stringify(st));}catch(e){}});});
+})();
+</script>
+</body>
+</html>
